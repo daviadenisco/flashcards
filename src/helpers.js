@@ -26,7 +26,7 @@ export function initialDealerDeal (deck) {
         deck.splice(random, 1);
         dealerHand.push(currentCard);
       };
-      dealerHandTotal = determineHandTotal(dealerHand);
+    //   dealerHandTotal = determineHandTotal(dealerHand);
     };
     return dealerHand;
 };
@@ -42,7 +42,7 @@ export function initialPlayerDeal (deck) {
         deck.splice(random, 1);
         playerHand.push(currentCard);
         };
-        playerHandTotal = determineHandTotal(playerHand);
+        // playerHandTotal = determineHandTotal(playerHand);
     };
     return playerHand;
 };
