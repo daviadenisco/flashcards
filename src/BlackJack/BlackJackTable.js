@@ -15,6 +15,8 @@ export default function BlackJackTable({ deck }) {
     const handleWager = () => {
         if (checkWager < totalChips && checkWager.toString().split('').includes('.')) {
             setWager(checkWager);
+            setTotalChips(checkWager);
+            console.log(wager);
         };
     };
 

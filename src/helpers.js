@@ -12,9 +12,7 @@ export function createDeck() {
     return deck;
 };
 
-let dealerHandTotal = 0;
 let dealerHand = [];
-let playerHandTotal = 0;
 let playerHand = [];
 
 export function initialDealerDeal (deck) {
