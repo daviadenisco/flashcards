@@ -11,56 +11,69 @@ export function createDeck() {
     }
     return deck;
 };
-
-let dealerHand = [];
-let playerHand = [];
-
-export function initialDealerDeal (deck) {
-    let currentCard;
-    // let newDeck = deck;
-
-    for (let i = 0; i < 2; i++) {
-      if (dealerHand.length < 2) {
-        let random = Math.floor(Math.random() * Math.floor(deck.length));
-        currentCard = deck[random];
-        deck.splice(random, 1);
-        dealerHand.push(currentCard);
-      };
-    //   dealerHandTotal = determineHandTotal(dealerHand);
-    };
-    return dealerHand;
-};
-
-export function initialPlayerDeal (deck) {
-    let currentCard;
-    // let newDeck = deck;
-
-    for (let i = 0; i < 2; i++) {
-        if (playerHand.length < 2) {
-        let random = Math.floor(Math.random() * Math.floor(deck.length));
-        currentCard = deck[random];
-        deck.splice(random, 1);
-        playerHand.push(currentCard);
-        };
-        // playerHandTotal = determineHandTotal(playerHand);
-    };
-    return playerHand;
-};
     
 export function determineHandTotal (hand) {
     let sum = 0;
-  
+    let acesCount = 0;
+
     for (let i = 0; i < hand.length; i++) {
-      if (typeof hand[i].value === 'number') {
-        sum += hand[i].value;
-      } else if (typeof hand[i].value === 'string') {
-        if (hand[i].value === 'A') {
-          sum += 11;
-        } else {
-          sum += 10;
-        }
+        if (typeof hand[i].value === 'number') {
+          sum += hand[i].value;
+        };
+        
+        if (typeof hand[i].value === 'string') {
+          if (hand[i].value === 'A') {
+            acesCount++;
+          } else {
+            sum += 10;
+          };
+        };
       };
+    
+    while (acesCount > 0) {
+      if (sum < 11) {
+        sum += 11;
+      } else {
+        sum += 1;
+      };
+      acesCount--;
     };
-  
     return sum;
+};
+
+export function dealCard (deck) {
+    let currentCard;
+
+    for (let i = 0; i < deck.length; i++) {
+        let random = Math.floor(Math.random() * Math.floor(deck.length));
+        currentCard = deck[random];
+    };
+
+    return currentCard;
+};
+
+export const message = {
+  dealer: 'Dealer Wins!',
+  player: 'Player Wins!',
+  push: 'Push!',
+  keepPlaying: 'Keep Playing',
+  placeBet: 'Place a bet to deal the cards!',
+  totalChips: 'Total Chips: ',
+  hit: 'Hit',
+  stand: 'Stand',
+  dealerHand: 'Dealer Hand',
+  playerHand: 'Player Hand',
+  total: 'Total: ',
+  blackjack: 'Blackjack!',
+  bust: 'Bust!',
+  currentBet: 'Current Bet',
+  playerLosesBet: 'Player busts, bet lost!',
+  one: 1.00,
+  five: 5.00,
+  ten: 10.00,
+  twenty: 20.00,
+  twentyFive: 25.00,
+  fifty: 50.00,
+  oneHundred: 100.00,
+  fiveHundred: 500.00,
 };

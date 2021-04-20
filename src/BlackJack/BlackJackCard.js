@@ -7,7 +7,6 @@ export default function BlackJackCard({ card }) {
     let clubImg = 'https://i.imgur.com/TxGu6WG.png';
     
     const handleImgSelection = (suit) => {
-      // console.log('SUIT: ', suit);
       if (suit === 'hearts') {
         return heartImg;
       } else if (suit === 'spades') {
@@ -20,7 +19,6 @@ export default function BlackJackCard({ card }) {
     }
 
   return (
-    <div>
       <div className='cards'>
         {card.value}
         <img 
@@ -29,6 +27,5 @@ export default function BlackJackCard({ card }) {
           alt={`${card.suit}`}
           ></img>
       </div>
-    </div>
   )
 }

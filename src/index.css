@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'DiscoBlingRegular';
+    src: local('DiscoBlingRegular'), url(./fonts/DiscoBlingRegular.ttf) format('truetype');
+    /* other formats include: 'woff2', 'truetype, 'opentype',
+                              'embedded-opentype', and 'svg' */
+}
+@font-face {
+    font-family: 'LasEnter';
+    src: local('LasEnter'), url(./fonts/LasEnter.ttf) format('truetype');
+    /* other formats include: 'woff2', 'truetype, 'opentype',
+                              'embedded-opentype', and 'svg' */
+}

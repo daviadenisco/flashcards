@@ -8,22 +8,22 @@ import './App.css';
 function App() {
     const [flashcards] = useState(QA);
     const [deck] = useState(createDeck);
-    const [takingABreak, setTakingABreak] = useState(true);
+    const [takingABreak, setTakingABreak] = useState(false);
     
   return (
-    <>
+    <div>
         <div className='header'>
-            {takingABreak ? 'Play BlackJack!' : 'Interview Prep Flashcards'}
+            {takingABreak ? <span>Play blackjack!</span> : <span>Interview Prep Flashcards</span>}
             <div className='btn-container'>
-                <button className='btn' onClick={() => setTakingABreak(!takingABreak)}>
+                <button className='nav-btn' onClick={() => setTakingABreak(!takingABreak)}>
                     {takingABreak ? 'Study' : 'Take a break!'}
                 </button>
             </div>
         </div>
-        <div className="container">
+        <div>
             {takingABreak ? <BlackJackTable deck={deck} /> : <FlashcardList flashcards={flashcards} />}
         </div>
-    </>
+    </div>
   );
 }
 
