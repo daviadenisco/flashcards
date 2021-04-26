@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import BlackJackHand from './BlackJackHand';
 import BetButton from './BetButton';
-import NewGameModal from './NewGameModal';
+import NewGame from './NewGame';
 import { determineHandTotal, dealCard, message } from '../helpers';
 
-// some messsge.playerHand are not showing up... why?
-// fix key prop issue
-// fix styling
 // finish tutorial
 // displaying number on-screen? use toFixed(2)
 // adding and subtracting numbers? use parseFloat(bet)
-// create GameOver.js and a Go to the ATM button to restart the game
 
 // {destructuring props} <= so we don't need to access flashcards from props.flashcards
 export default function BlackJackTable({ deck, setTakingABreak }) {
@@ -221,7 +217,7 @@ export default function BlackJackTable({ deck, setTakingABreak }) {
                     </div> 
                     : ''}
                     {winner && totalChips < 1 ? 
-                        <NewGameModal setTotalChips={setTotalChips} handleNewDeal={handleNewDeal} setTakingABreak={setTakingABreak} />
+                        <NewGame setTotalChips={setTotalChips} handleNewDeal={handleNewDeal} setTakingABreak={setTakingABreak} />
                         : ''}
                     <div className='btn-controls'>
                         <div className='btn-align'>
@@ -245,7 +241,7 @@ export default function BlackJackTable({ deck, setTakingABreak }) {
                     {dealerHand.length ? 
                         <BlackJackHand 
                             hand={dealerHand} 
-                            key={`${dealerHand[0].value}${dealerHand[0].suit}`} 
+                            key={`${dealerHand[0].value}${dealerHand[0].suit}d`} 
                             revealDealerCard={revealDealerCard} 
                             owner='dealer' 
                         />
@@ -263,7 +259,7 @@ export default function BlackJackTable({ deck, setTakingABreak }) {
                     {playerHand.length ? 
                         <BlackJackHand 
                             hand={playerHand} 
-                            key={`${playerHand[0].value}${playerHand[0].suit}`} 
+                            key={`${playerHand[0].value}${playerHand[0].suit}p`} 
                             owner='player'
                         />
                     : ''}

@@ -10,6 +10,7 @@ export default function BetButton({ bet, totalChips, setBet }) {
                         className={`btn m-r-20 ${bet === betAmt.value ? `selected ${betAmt.color}` : ''}`} 
                         disabled={totalChips >= betAmt.value || bet === betAmt.value ? false : true} 
                         onClick={() => setBet(betAmt.value)}
+                        key={betAmt.value}
                     >
                         ${betAmt.value}
                     </button>
