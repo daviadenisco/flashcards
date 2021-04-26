@@ -8,7 +8,7 @@ import './App.css';
 function App() {
     const [flashcards] = useState(QA);
     const [deck] = useState(createDeck);
-    const [takingABreak, setTakingABreak] = useState(false);
+    const [takingABreak, setTakingABreak] = useState(true);
     
   return (
     <div>
@@ -21,7 +21,7 @@ function App() {
             </div>
         </div>
         <div>
-            {takingABreak ? <BlackJackTable deck={deck} /> : <FlashcardList flashcards={flashcards} />}
+            {takingABreak ? <BlackJackTable deck={deck} setTakingABreak={setTakingABreak} /> : <FlashcardList flashcards={flashcards} />}
         </div>
     </div>
   );

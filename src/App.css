@@ -4,12 +4,18 @@ body {
   margin: 0;
 }
 
+.flashcard-grid {
+  align-items: center;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  height: 146px;
+  margin: 50px;
+}
+
 .container {
-  /* max-width: 1500px; */
   background-color: #009900;
-  height: 750px;
-  margin: 1rem 2rem;
-  /* text-align: center; */
+  height: 50em;
   width: auto;
 }
 
@@ -21,8 +27,7 @@ body {
   flex-wrap: wrap;
   font-family: "Trebuchet MS", sans-serif;
   font-size: 2em;
-  letter-spacing: -2px;
-  padding: 2.5rem;
+  padding: 1em;
   position: sticky; 
   text-transform: uppercase;
   top: 0;
@@ -34,7 +39,7 @@ body {
   border: none;
   border-radius: .3em;
   color: white;
-  font-size: 20px;
+  font-size: .65em;
   outline: none;
   padding: .5em 1em;
 }
@@ -69,20 +74,12 @@ body {
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, .5);
 }
 
-.card-grid {
-  align-items: center;
-  display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  margin: 50px;
-}
-
 .flip {
   --rotate-y: 180deg;
 }
 
 .card .front {
-  font-size: 18px;
+  font-size: 1.125em;
   left: 0;
 }
 
@@ -111,23 +108,15 @@ body {
   margin-top: 0;
 }
 
-.banner {
-  color: gold;
-  font-family: DiscoBlingRegular;
-  font-size: 40px;
-  height: 60px;
-  text-transform: uppercase;
-}
-
 .player-controls {
-  height: 16em;
+  height: 14em;
   text-align: center;
 }
 
 .btn {
   border: none;
   border-radius: .3em;
-  font-size: 20px;
+  font-size: 1.25em;
   outline: none;
   padding: .5em 1em;
 }
@@ -148,7 +137,7 @@ body {
 }
 
 .card-img {
-  width: 40px;
+  width: 1em;
 }
 
 .card-back {
@@ -157,7 +146,7 @@ body {
   border-radius: .25rem;
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, .3);
   display: flex;
-  height: 140px;
+  height: 8.75em;
   justify-content: center;
   position: relative;
   width: 100px;
@@ -166,9 +155,22 @@ body {
 .cards-grid {
   align-items: center;
   display: grid;
-  gap: 2rem;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  /* gap: 2rem; */
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  height: 146px;
   margin: 50px;
+}
+
+.hand-labels {
+  /* height: 50px; */
+  color: gold;
+  font-family: Optima;
+  font-size: 24px;
+  letter-spacing: 2px;
+}
+
+.m-l-20 {
+  margin-left: 20px;
 }
 
 .m-t-20 {
@@ -195,7 +197,7 @@ body {
 
 .btn-controls {
   display: table;
-  height: 80px;
+  height: 70px;
   width: 100%;
 }
 
@@ -208,38 +210,109 @@ body {
   padding: 20px;
 }
 
-.blue {
-  border: 3px solid blue;
-}
-
-.green {
-  border: 3px solid green;
-}
-
-.red {
-  border: 3px solid red;
+.white {
+  border: 3px solid white;
 }
 
 .yellow {
   border: 3px solid yellow;
 }
 
-.brown {
-  border: 3px solid brown;
+.red {
+  border: 3px solid red;
+}
+
+.blue {
+  border: 3px solid blue;
+}
+
+.grey {
+  border: 3px solid grey;
+}
+
+.green {
+  border: 3px solid green;
+}
+
+.orange {
+  border: 3px solid orange;
 }
 
 .black {
   border: 3px solid black;
 }
 
+.pink {
+  border: 3px solid pink;
+}
+
 .purple {
   border: 3px solid purple;
 }
 
-.white {
-  border: 3px solid white;
+.banner {
+  height: 82px;
 }
 
-.grey {
-  border: 3px solid grey;
+.shimmer {
+  display: inline;
+  text-transform: uppercase;
+  font-family: DiscoBlingRegular;
+  font-weight: 300;
+  font-size: 3em;
+  text-align: center;
+  color: rgba(233, 188, 43, 0.8);
+  background: -webkit-gradient(linear, left top, right top, from(rgb(129, 100, 5)), to(rgb(129, 100, 5)), color-stop(0.5, #fff));
+  background: -moz-gradient(linear, left top, right top, from(rgb(129, 100, 5)), to(rgb(129, 100, 5)), color-stop(0.5, #fff));
+  background: gradient(linear, left top, right top, from(rgb(129, 100, 5)), to(rgb(129, 100, 5)), color-stop(0.5, #fff));
+  -webkit-background-size: 125px 100%;
+  -moz-background-size: 125px 100%;
+  background-size: 125px 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+  -webkit-animation-name: shimmer;
+  -moz-animation-name: shimmer;
+  animation-name: shimmer;
+  -webkit-animation-duration: 4s;
+  -moz-animation-duration: 4s;
+  animation-duration: 4s;
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-color: rgb(129, 100, 5);
+}
+@-moz-keyframes shimmer {
+  0% {
+    background-position: top left;
+  }
+  100% {
+    background-position: top right;
+  }
+}
+@-webkit-keyframes shimmer {
+  0% {
+    background-position: top left;
+  }
+  100% {
+    background-position: top right;
+  }
+}
+@-o-keyframes shimmer {
+  0% {
+    background-position: top left;
+  }
+  100% {
+    background-position: top right;
+  }
+}
+@keyframes shimmer {
+  0% {
+    background-position: top left;
+  }
+  100% {
+    background-position: top right;
+  }
 }

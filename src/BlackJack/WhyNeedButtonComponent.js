@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import BlackJackHand from './BlackJackHand';
 import BetButton from './BetButton';
-import NewGameModal from './NewGameModal';
-import { determineHandTotal, dealCard, message } from '../helpers';
+import { determineHandTotal, dealCard, message, amt } from '../helpers';
 
-// some messsge.playerHand are not showing up... why?
 // fix key prop issue
 // fix styling
 // finish tutorial
@@ -13,7 +11,7 @@ import { determineHandTotal, dealCard, message } from '../helpers';
 // create GameOver.js and a Go to the ATM button to restart the game
 
 // {destructuring props} <= so we don't need to access flashcards from props.flashcards
-export default function BlackJackTable({ deck, setTakingABreak }) {
+export default function BlackJackTable({ deck }) {
     let gameDeck = deck;
     let chipStart = 500;
     chipStart = parseFloat(chipStart);
@@ -31,7 +29,6 @@ export default function BlackJackTable({ deck, setTakingABreak }) {
     const [playerBust, setPlayerBust] = useState(false);
     const [dealerBust, setDealerBust] = useState(false);
     const [revealDealerCard, setRevealDealerCard] = useState(false);
-    const [lostHat, setLostHat] = useState(false);
     const [winner, setWinner] = useState();
 
     const handleNewDeal = () => {
@@ -47,15 +44,8 @@ export default function BlackJackTable({ deck, setTakingABreak }) {
         setPlayerBust(false);
         setDealerBust(false);
         setRevealDealerCard(false);
-        setLostHat(false);
         setWinner();
     };
-
-    useEffect(() => {
-        if (totalChips === 0 && bet === 0) {
-            setLostHat(true);
-        }
-    }, [bet, totalChips, lostHat])
 
     useEffect(() => {
         let theBet = parseFloat(bet);
@@ -93,6 +83,7 @@ export default function BlackJackTable({ deck, setTakingABreak }) {
     }, [playerStand, dealerStand]);
 
     useEffect(() => {
+ 
         if (playerTotal > 21) {
             setPlayerBust(true);
             setPlayerStand(true);
@@ -123,11 +114,12 @@ export default function BlackJackTable({ deck, setTakingABreak }) {
         return newTotal;
     };
 
+    // add a card to the dealer's hand
     const handleDealerHit = (gameDeck) => {
         let card = dealCard(gameDeck);
         setDealerHand(dealerHand.concat(card));
     };
-
+    // Ace count must be part of the state, otherwise 10 will be subtracted on every hit.
     const handlePlayerHit = (gameDeck) => {
         let card = dealCard(gameDeck);
 
@@ -206,23 +198,38 @@ export default function BlackJackTable({ deck, setTakingABreak }) {
                 <div className='banner'>
                     <div className='shimmer'>{bet < 1 ? message.placeBet : winner}</div>
                 </div>
-                <div>
-                    {(!winner) ? 
-                    <div className='btn-controls'>
-                        <div className='btn-align'>
-                            <BetButton winner={winner} bet={bet} totalChips={totalChips} setBet={setBet} />
-                        </div>
-                    </div> : ''}
-                    {winner && totalChips > 0.5 ? 
+                {winner || (totalChips === 0 && bet === 0) ? 
                     <div className='btn-controls'>
                         <div className='btn-align'>
                             <button className='btn' onClick={() => handleNewDeal()}>{message.keepPlaying}</button>
                         </div>
-                    </div> 
-                    : ''}
-                    {winner && totalChips < 1 ? 
-                        <NewGameModal setTotalChips={setTotalChips} handleNewDeal={handleNewDeal} setTakingABreak={setTakingABreak} />
-                        : ''}
+                    </div> : ''}
+                {totalChips === 0 && bet === 0 ? <div>You lost all your money gambling. How are you going to pay your bills?!</div> : ''}
+                <div>
+                    {(!winner) ? <div className='btn-controls'>
+                        <div className='btn-align'>
+                            <BetButton winner={winner} bet={bet} totalChips={totalChips} setBet={setBet} />
+                            {/* <button className={`btn m-r-20 ${bet === amt.one.value ? 'selected white' : ''}`} disabled={totalChips >= amt.one.value || bet === amt.one.value ? false : true} onClick={() => setBet(amt.one.value)}>${amt.one.value}</button>
+
+                            <button className={`btn m-r-20 ${bet === amt.two.value ? 'selected yellow' : ''}`} disabled={totalChips >= amt.two.value || bet === amt.two.value ? false : true} onClick={() => setBet(amt.two.value)}>${amt.two.value}</button>
+
+                            <button className={`btn m-r-20 ${bet === amt.five.value ? 'selected red' : ''}`} disabled={totalChips >= amt.five.value || bet === amt.five.value ? false : true} onClick={() => setBet(amt.five.value)}>${amt.five.value}</button>
+
+                            <button className={`btn m-r-20 ${bet === amt.ten.value ? 'selected blue' : ''}`} disabled={totalChips >= amt.ten.value || bet === amt.ten.value ? false : true} onClick={() => setBet(amt.ten.value)}>${amt.ten.value}</button>
+
+                            <button className={`btn m-r-20 ${bet === amt.twenty.value ? 'selected grey' : ''}`} disabled={totalChips >= amt.twenty.value ? false : true} onClick={() => setBet(amt.twenty.value)}>${amt.twenty.value}</button>
+
+                            <button className={`btn m-r-20 ${bet === amt.twentyFive.value ? 'selected green' : ''}`} disabled={totalChips >= amt.twentyFive.value ? false : true} onClick={() => setBet(amt.twentyFive.value)}>${amt.twentyFive.value}</button>
+
+                            <button className={`btn m-r-20 ${bet === amt.fifty.value ? 'selected orange' : ''}`} disabled={totalChips >= amt.fifty.value || bet === amt.fifty.value ? false : true} onClick={() => setBet(amt.fifty.value)}>${amt.fifty.value}</button>
+
+                            <button className={`btn m-r-20 ${bet === amt.oneHundred.value ? 'selected black' : ''}`} disabled={totalChips >= amt.oneHundred.value || bet === amt.oneHundred.value ? false : true} onClick={() => setBet(amt.oneHundred.value)}>${amt.oneHundred.value}</button>
+
+                            <button className={`btn m-r-20 ${bet === amt.twoHundredFifty.value ? 'selected pink' : ''}`} disabled={totalChips >= amt.twoHundredFifty.value || bet === amt.twoHundredFifty.value ? false : true} onClick={() => setBet(amt.twoHundredFifty.value)}>${amt.twoHundredFifty.value}</button>
+
+                            <button className={`btn ${bet === amt.fiveHundred.value ? 'selected purple' : ''}`} disabled={totalChips >= amt.fiveHundred.value || bet === amt.fiveHundred.value ? false : true} onClick={() => setBet(amt.fiveHundred.value)}>${amt.fiveHundred.value}</button> */}
+                        </div>
+                    </div> : ''}
                     <div className='btn-controls'>
                         <div className='btn-align'>
                             <span className='f-s-30 m-r-20'>{message.totalChips} {`$ ${totalChips.toFixed(2)}`}</span>
@@ -232,43 +239,38 @@ export default function BlackJackTable({ deck, setTakingABreak }) {
                     </div>
                 </div>
             </div>
-            <>
-                <div className='left-align m-l-20 m-t-20 hand-labels'>
-                    {message.dealerHand } 
-                    {/* space before message.whatever is necessary to keep a space between each word */}
-                    {playerStand === true ? <> {message.total} {dealerTotal} </> : ''}
-                    {dealerBust === true ? <> {message.bust} </> : ''}
-                    {dealerBlackJack ? <> {message.blackjack} </> : ''}
-                </div>
-                <div className='cards-grid'>
-                    {/* THIS CODE CAUSES KEY PROP ISSUE */}
-                    {dealerHand.length ? 
-                        <BlackJackHand 
-                            hand={dealerHand} 
-                            key={`${dealerHand[0].value}${dealerHand[0].suit}`} 
-                            revealDealerCard={revealDealerCard} 
-                            owner='dealer' 
-                        />
-                    : ''}  
-                </div>
-            </>
-            <>
-                <div className='left-align m-l-20 m-t-20 hand-labels'>
-                    {message.playerHand } 
-                    {playerHand.length ? <> {message.total} {playerTotal} </> : ''}
-                    {playerBust === true ? <> {message.bust} </> : ''}
-                    {playerBlackJack === true ? <> {message.blackjack} </> : ''}
-                </div>
-                <div className='cards-grid'>
-                    {playerHand.length ? 
-                        <BlackJackHand 
-                            hand={playerHand} 
-                            key={`${playerHand[0].value}${playerHand[0].suit}`} 
-                            owner='player'
-                        />
-                    : ''}
-                </div>
-            </>
+            <div className='left-align m-l-20 m-t-20 hand-labels'>
+                {message.dealerHand} 
+                {playerStand === true ? <>{message.total} {dealerTotal}</> : ''}
+                {dealerBust === true ? <>{message.bust}</> : ''}
+                {dealerBlackJack ? <>{message.blackjack}</> : ''}
+            </div>
+            <div className='cards-grid'>
+                {/* THIS CODE CAUSES KEY PROP ISSUE */}
+                {dealerHand.length ? 
+                    <BlackJackHand 
+                        hand={dealerHand} 
+                        key={`${dealerHand[0].value}${dealerHand[0].suit}`} 
+                        revealDealerCard={revealDealerCard} 
+                        owner='dealer' 
+                    />
+                : ''}  
+            </div>
+            <div className='left-align m-l-20 m-t-20 hand-labels'>
+                {message.playerHand} 
+                {playerHand.length ? <>{message.total} {playerTotal}</> : ''}
+                {playerBust === true ? <>{message.bust}</> : ''}
+                {playerBlackJack === true ? <>{message.blackjack}</> : ''}
+            </div>
+            <div className='cards-grid'>
+                {playerHand.length ? 
+                    <BlackJackHand 
+                        hand={playerHand} 
+                        key={`${playerHand[0].value}${playerHand[0].suit}`} 
+                        owner='player'
+                    />
+                : ''}
+            </div>
         </div>
     )
 }

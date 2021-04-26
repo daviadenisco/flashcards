@@ -1,5 +1,5 @@
 export function createDeck() {
-    let values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A'];
+    let values = [10, 'J', 'Q', 'K', 'A'];
     let suits = ['hearts', 'diamonds', 'spades', 'clubs'];
     let deck = [];
     
@@ -68,12 +68,47 @@ export const message = {
   bust: 'Bust!',
   currentBet: 'Current Bet',
   playerLosesBet: 'Player busts, bet lost!',
-  one: 1.00,
-  five: 5.00,
-  ten: 10.00,
-  twenty: 20.00,
-  twentyFive: 25.00,
-  fifty: 50.00,
-  oneHundred: 100.00,
-  fiveHundred: 500.00,
 };
+
+export const amt = [
+  {
+    value: 1,
+    color: 'white',
+  },
+  {
+    value: 2,
+    color: 'yellow',
+  },
+  {
+    value: 5,
+    color: 'red',
+  },
+  {
+    value: 10,
+    color: 'blue',
+  },
+  {
+    value: 20,
+    color: 'grey',
+  },
+  {
+    value: 25,
+    color: 'green',
+  },
+  {
+    value: 50,
+    color: 'orange',
+  },
+  {
+    value: 100,
+    color: 'black',
+  },
+  {
+    value: 250,
+    color: 'pink',
+  },
+  {
+    value: 500,
+    color: 'purple',
+  },
+];
