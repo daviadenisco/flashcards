@@ -8,7 +8,7 @@ import './App.css';
 function App() {
     const [flashcards] = useState(QA);
     const [deck] = useState(createDeck);
-    const [takingABreak, setTakingABreak] = useState(true);
+    const [takingABreak, setTakingABreak] = useState(false);
     
   return (
     <div>
